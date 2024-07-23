@@ -45,14 +45,14 @@ service:
 
 services:
   - type: ClusterIP
-    name: external
+    name: pub
     ports:
       - name: network
         port: 31415
         targetPort: http
         protocol: TCP
   - type: ClusterIP
-    name: internal
+    name: int
     ports:
       - name: api
         port: 8080
@@ -106,9 +106,11 @@ tolerations: []
 
 affinity: {}
 
-sleep: true
+## Launch the container with `sleep infinity`
+maintenance: true
 
 ## Name of the secret containing private.pem, frost.vkey and frost.skey
+## It must be a pre-existing secret or chart won't deploy
 secretName: "butane-oracle-secrets"
 
 kupo:

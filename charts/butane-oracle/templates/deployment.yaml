@@ -33,8 +33,7 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
 
-          {{- if .Values.sleep | default false }}
-          image: "ubuntu"
+          {{- if .Values.maintenance | default false }}
           command: [ "/bin/sh", "-c", "--" ]
           args: [ "sleep infinity" ]
           {{- else }}
