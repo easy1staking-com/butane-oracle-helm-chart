@@ -9,7 +9,7 @@ data:
     keygen:
       enabled: false # Set this to true to generate frost keys instead of serving traffic
       min_signers: 2 # How many signers do we need to publish a package? Every node must agree on this.
-    frost_address: addr1v9crq6rkkv4nn6z2l6ysej4degn9rsugnuperhaxaw6ed3qqyzukx
+    frost_address: {{ .Values.frost.address }}
       # This is the address of your current FROST public key. The key generation process will print it.
     # Every node must agree on this.
     peers:

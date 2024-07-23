@@ -137,3 +137,16 @@ sleep: true
 
 kupo:
   url: http://kupo:1442
+
+frost:
+  address: "addr1..."
+
+peers: []
+#  - address: 127.0.0.1:8001
+#    label: Descriptive label
+#    public_key: |
+#      -----BEGIN PUBLIC KEY-----
+#      MCowBQYDK2VwAyEAtYoVpsW+gRlzXM9Iu3OBoopNj6y5OB8oeOJIWD10G/U=
+#      -----END PUBLIC KEY-----
+
+
