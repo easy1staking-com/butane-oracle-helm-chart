@@ -1,0 +1,132 @@
+# Default values for butane-oracle.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: sundaeswap/butane-oracle
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Automatically mount a ServiceAccount's API credentials?
+  automount: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+services:
+  - type: ClusterIP
+    name: pub
+    ports:
+      - name: network
+        port: 31415
+        targetPort: http
+        protocol: TCP
+  - type: ClusterIP
+    name: int
+    ports:
+      - name: api
+        port: 8080
+        targetPort: http
+        protocol: TCP
+      - name: health
+        port: 18000
+        targetPort: http
+        protocol: TCP
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+#livenessProbe:
+#  httpGet:
+#    path: /
+#    port: http
+#readinessProbe:
+#  httpGet:
+#    path: /
+#    port: http
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+## Launch the container with `sleep infinity`
+maintenance: true
+
+## Name of the secret containing private.pem, frost.vkey and frost.skey
+## It must be a pre-existing secret or chart won't deploy
+secretName: "butane-oracle-secrets"
+
+kupo:
+  url: http://kupo:1442
+
+frost:
+  address: "addr1..."
+  frostVKeyFilePath: "/app/keys/{{ .Values.frost.address }}/frost.vkey"
+  frostSKeyFilePath: "/app/keys/{{ .Values.frost.address }}/frost.skey"
+
+peers: []
+#  - address: 127.0.0.1:8001
+#    label: Descriptive label
+#    public_key: |
+#      -----BEGIN PUBLIC KEY-----
+#      MCowBQYDK2VwAyEAtYoVpsW+gRlzXM9Iu3OBoopNj6y5OB8oeOJIWD10G/U=
+#      -----END PUBLIC KEY-----
+
+

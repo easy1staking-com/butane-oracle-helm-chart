@@ -1,0 +1,21 @@
+{{- $fullName := include "butane-oracle.fullname" . -}}
+{{ range $service := .Values.services }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{  printf "%s-%s" $fullName $service.name }}
+  labels:
+    {{- include "butane-oracle.labels" $ | nindent 4 }}
+spec:
+  type: {{ $service.type }}
+  ports:
+    {{- range $port := $service.ports }}
+    - port: {{ $port.port }}
+      targetPort: {{ $port.targetPort }}
+      protocol: {{ $port.protocol }}
+      name: {{ $port.name }}
+    {{- end }}
+  selector:
+    {{- include "butane-oracle.selectorLabels" $  | nindent 4 }}
+{{ end }}
