@@ -1,10 +1,10 @@
+{{- $fullName := include "butane-oracle.fullname" . -}}
 {{ range $service := .Values.services }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  ## FIXME: this should really try to append the name to the full name
-  name: {{ printf "%s-%s" $.Release.Name $service.name }}
+  name: {{  printf "%s-%s" $fullName $service.name }}
   labels:
     {{- include "butane-oracle.labels" $ | nindent 4 }}
 spec:
