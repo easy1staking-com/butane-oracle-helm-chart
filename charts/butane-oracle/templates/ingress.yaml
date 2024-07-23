@@ -1,6 +1,7 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "butane-oracle.fullname" . -}}
-{{- $svcPort := .Values.service.port -}}
+{{- $fstService := index .Values.services 0 -}}
+{{ $svcPort := index $fstService.ports 0 }}
 {{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
   {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
@@ -15,7 +16,7 @@ apiVersion: extensions/v1beta1
 {{- end }}
 kind: Ingress
 metadata:
-  name: {{ $fullName }}
+  name: {{ printf "%s-%s" $fullName $fstService.name }}
   labels:
     {{- include "butane-oracle.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
@@ -49,12 +50,12 @@ spec:
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
-                name: {{ $fullName }}
+                name: {{ printf "%s-%s" $fullName $fstService.name }}
                 port:
-                  number: {{ $svcPort }}
+                  number: {{ $svcPort.port }}
               {{- else }}
-              serviceName: {{ $fullName }}
-              servicePort: {{ $svcPort }}
+              serviceName: {{ printf "%s-%s" $fullName $fstService.name }}
+              servicePort: {{ $svcPort.port }}
               {{- end }}
           {{- end }}
     {{- end }}
