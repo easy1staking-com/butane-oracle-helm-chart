@@ -100,33 +100,6 @@ resources: {}
 #    path: /
 #    port: http
 
-# Additional volumes on the output Deployment definition.
-volumes:
-  - name: pem-secret-key
-    secret:
-      secretName: butane-oracle-secrets
-  - name: frost-secret-key
-    secret:
-      secretName: butane-oracle-secrets
-  - name: config
-    configMap:
-      name: butane-oracle
-
-# Additional volumeMounts on the output Deployment definition.
-volumeMounts:
-  - name: config
-    mountPath: /app/config.yaml
-    subPath: config.yaml
-  - name: pem-secret-key
-    mountPath: /app/keys/private.pem
-    subPath: private.pem
-  - name: frost-secret-key
-    mountPath: /app/keys/addr1v9crq6rkkv4nn6z2l6ysej4degn9rsugnuperhaxaw6ed3qqyzukx/frost.skey
-    subPath: frost.skey
-  - name: frost-secret-key
-    mountPath: /app/keys/addr1v9crq6rkkv4nn6z2l6ysej4degn9rsugnuperhaxaw6ed3qqyzukx/frost.vkey
-    subPath: frost.vkey
-
 nodeSelector: {}
 
 tolerations: []
@@ -135,11 +108,16 @@ affinity: {}
 
 sleep: true
 
+## Name of the secret containing private.pem, frost.vkey and frost.skey
+secretName: "butane-oracle-secrets"
+
 kupo:
   url: http://kupo:1442
 
 frost:
   address: "addr1..."
+  frostVKeyFilePath: "/app/keys/{{ .Values.frost.address }}/frost.vkey"
+  frostSKeyFilePath: "/app/keys/{{ .Values.frost.address }}/frost.skey"
 
 peers: []
 #  - address: 127.0.0.1:8001

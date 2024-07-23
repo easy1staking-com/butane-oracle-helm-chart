@@ -46,8 +46,6 @@ spec:
 
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            - name: CONFIG_FILE
-              value: "/app/config.yaml"
             - name: KEYS_DIRECTORY
               value: "/app/keys"
           ports:
@@ -60,14 +58,29 @@ spec:
             {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- with .Values.volumeMounts }}
           volumeMounts:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-      {{- with .Values.volumes }}
+            - name: config
+              mountPath: /app/config.yaml
+              subPath: config.yaml
+            - name: pem-secret-key
+              mountPath: /app/keys/private.pem
+              subPath: private.pem
+            - name: frost-secret-key
+              mountPath: {{ tpl .Values.frost.frostSKeyFilePath . }}
+              subPath: frost.skey
+            - name: frost-secret-key
+              mountPath: {{ tpl .Values.frost.frostVKeyFilePath . }}
+              subPath: frost.vkey
       volumes:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+          - name: pem-secret-key
+            secret:
+              secretName: {{ .Values.secretName }}
+          - name: frost-secret-key
+            secret:
+              secretName: {{ .Values.secretName }}
+          - name: config
+            configMap:
+              name: butane-oracle
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
