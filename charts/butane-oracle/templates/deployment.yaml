@@ -37,9 +37,7 @@ spec:
           command: [ "/bin/sh", "-c", "--" ]
           args: [ "sleep infinity" ]
           {{- else }}
-          args:
-            - "--config-file"
-            - /app/config.yaml
+          command: ["./oracles", "-c", "/app/config.yaml"]
           {{- end }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
 
