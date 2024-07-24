@@ -79,7 +79,7 @@ spec:
               secretName: {{ .Values.secretName }}
           - name: config
             configMap:
-              name: butane-oracle
+              name: {{ include "butane-oracle.fullname" . }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
