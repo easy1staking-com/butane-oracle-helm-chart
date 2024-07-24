@@ -1,11 +1,12 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "butane-oracle.fullname" . }}
   labels:
     {{- include "butane-oracle.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  serviceName: {{ include "butane-oracle.fullname" . }}
   selector:
     matchLabels:
       {{- include "butane-oracle.selectorLabels" . | nindent 6 }}
@@ -90,3 +91,5 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+  updateStrategy:
+    type: RollingUpdate
