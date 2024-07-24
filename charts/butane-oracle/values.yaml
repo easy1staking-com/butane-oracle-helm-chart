@@ -52,7 +52,7 @@ services:
         targetPort: http
         protocol: TCP
   - type: NodePort
-    name: pub
+    name: pub-np
     ports:
       - name: network
         port: 31415
