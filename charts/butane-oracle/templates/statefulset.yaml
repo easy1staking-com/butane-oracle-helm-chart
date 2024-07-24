@@ -48,7 +48,7 @@ spec:
               value: "/app/keys"
           ports:
             {{- range $services := .Values.services }}
-            {{- range port := $services.ports }}
+            {{- range $port := $services.ports }}
             - name: {{ $port.name }}
               containerPort: {{ $port.port }}
               protocol: {{ $port.protocol }}
