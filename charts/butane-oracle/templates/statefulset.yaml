@@ -60,6 +60,8 @@ spec:
             - name: config
               mountPath: /app/config.yaml
               subPath: config.yaml
+            - name: {{ include "butane-oracle.fullname" . }}
+              mountPath: /app/keys
             - name: pem-secret-key
               mountPath: /app/keys/private.pem
               subPath: private.pem
@@ -91,5 +93,13 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+  volumeClaimTemplates:
+    - metadata:
+        name: {{ include "butane-oracle.fullname" . }}
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: {{ .Values.volumeSize | default "1Gi" }}
   updateStrategy:
     type: RollingUpdate

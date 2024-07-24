@@ -15,6 +15,9 @@ spec:
       targetPort: {{ $port.targetPort }}
       protocol: {{ $port.protocol }}
       name: {{ $port.name }}
+      {{- if $port.nodePort }}
+      nodePort: {{ $port.nodePort }}
+      {{- end }}
     {{- end }}
   selector:
     {{- include "butane-oracle.selectorLabels" $  | nindent 4 }}
