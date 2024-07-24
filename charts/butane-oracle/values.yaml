@@ -107,7 +107,7 @@ tolerations: []
 affinity: {}
 
 ## Launch the container with `sleep infinity`
-maintenance: true
+maintenance: false
 
 ## Name of the secret containing private.pem, frost.vkey and frost.skey
 ## It must be a pre-existing secret or chart won't deploy
