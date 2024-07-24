@@ -47,20 +47,24 @@ services:
   - type: ClusterIP
     name: pub
     ports:
-      - name: network
-        port: 31415
-        targetPort: http
-        protocol: TCP
-  - type: ClusterIP
-    name: int
-    ports:
       - name: api
         port: 8080
         targetPort: http
         protocol: TCP
+  - type: NodePort
+    name: pub
+    ports:
+      - name: network
+        port: 31415
+        nodePort: 31415
+        targetPort: network
+        protocol: TCP
+  - type: ClusterIP
+    name: int
+    ports:
       - name: health
         port: 18000
-        targetPort: http
+        targetPort: health
         protocol: TCP
 
 ingress:
