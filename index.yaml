@@ -3,6 +3,16 @@ entries:
   butane-oracle:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-07-24T14:25:06.339331748Z"
+    description: A Helm chart for Kubernetes
+    digest: 19ab01ebb5ff3c0681940a20024fa849a9c2d860132be306eb6a09c7e155efff
+    name: butane-oracle
+    type: application
+    urls:
+    - https://github.com/easy1staking-com/butane-oracle-helm-chart/releases/download/butane-oracle-0.0.1-beta5/butane-oracle-0.0.1-beta5.tgz
+    version: 0.0.1-beta5
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-07-24T08:27:21.947094643Z"
     description: A Helm chart for Kubernetes
     digest: 4cd924789701340ebae157e45f14ee6a4f19dbe46b626243d77ee2f83186f656
@@ -41,4 +51,4 @@ entries:
     urls:
     - https://github.com/easy1staking-com/butane-oracle-helm-chart/releases/download/butane-oracle-0.0.1-beta1/butane-oracle-0.0.1-beta1.tgz
     version: 0.0.1-beta1
-generated: "2024-07-24T08:27:21.947123627Z"
+generated: "2024-07-24T14:25:06.339368156Z"
