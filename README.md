@@ -11,3 +11,13 @@ k create secret generic butane-oracle-secrets \
 ```
 
 And then apply the `secrets.yaml` in the relevant namespace.
+
+## How to install
+
+Add repository to helm repos with
+
+`helm repo add butane-oracle https://easy1staking-com.github.io/butane-oracle-helm-chart/`
+
+Then install with
+
+`helm upgrade --install -n cardano-bots butane-oracle butane-oracle [-f my-values-file.yaml]`
