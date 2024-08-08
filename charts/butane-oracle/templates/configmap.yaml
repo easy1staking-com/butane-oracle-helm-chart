@@ -12,9 +12,14 @@ data:
     heartbeat_ms: 500   # How long should the leader wait before sending a heartbeat
     timeout_ms: 2000     # How long should we wait before picking a new leader
     consensus: true
+    {{- if .Values.logs }}
+    logs:
+      {{- toYaml . | nindent 6 }}
+    {{- else }}
     logs:
       json: true
       level: info
+    {{- end }}
     {{- with .Values.keygen }}
     keygen:
       {{- toYaml . | nindent 6 }}
