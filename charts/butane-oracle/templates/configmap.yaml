@@ -13,8 +13,10 @@ data:
     timeout_ms: 2000     # How long should we wait before picking a new leader
     consensus: true
     {{- if .Values.logs }}
+    {{- with .Values.logs }}
     logs:
       {{- toYaml . | nindent 6 }}
+    {{- end }}
     {{- else }}
     logs:
       json: true
