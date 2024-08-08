@@ -20,4 +20,4 @@ Add repository to helm repos with
 
 Then install with
 
-`helm upgrade --install -n cardano-bots butane-oracle butane-oracle [-f my-values-file.yaml]`
+`helm upgrade --install [-n my-namespace] butane-oracle butane-oracle [-f my-values-file.yaml]`
