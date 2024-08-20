@@ -77,10 +77,10 @@ spec:
               subPath: config.yaml
             - name: {{ include "butane-oracle.fullname" . }}
               mountPath: /app/keys
-              subPath: /keys
+              subPath: keys
             - name: {{ include "butane-oracle.fullname" . }}
               mountPath: /data
-              subPath: /data
+              subPath: data
             - name: pem-secret-key
               mountPath: /app/keys/private.pem
               subPath: private.pem
