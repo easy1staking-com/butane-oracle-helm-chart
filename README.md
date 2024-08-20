@@ -21,3 +21,10 @@ Add repository to helm repos with
 Then install with
 
 `helm upgrade --install [-n my-namespace] butane-oracle butane-oracle [-f my-values-file.yaml]`
+
+## FX Rate API
+
+The `FXRATESAPI_API_KEY` env var can be populated with an api key from https://fxratesapi.com/.
+
+The api key is not required but without it, this instance of the bot won't be able to participate in 
+some price signature.
