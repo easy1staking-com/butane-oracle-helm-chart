@@ -46,6 +46,17 @@ spec:
           env:
             - name: KEYS_DIRECTORY
               value: "/app/keys"
+            {{- if .Values.fxRateApiKey.secret.name }}
+            - name: FXRATESAPI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.fxRateApiKey.secret.name }}
+                  key: {{ .Values.fxRateApiKey.secret.key }}
+            {{- else if .Values.fxRateApiKey.key }}
+            - name: FXRATESAPI_API_KEY
+              value: {{ .Values.fxRateApiKey.key }}
+            {{- end}}
+
           ports:
             {{- range $services := .Values.services }}
             {{- range $port := $services.ports }}
@@ -66,6 +77,10 @@ spec:
               subPath: config.yaml
             - name: {{ include "butane-oracle.fullname" . }}
               mountPath: /app/keys
+              subPath: /keys
+            - name: {{ include "butane-oracle.fullname" . }}
+              mountPath: /data
+              subPath: /data
             - name: pem-secret-key
               mountPath: /app/keys/private.pem
               subPath: private.pem

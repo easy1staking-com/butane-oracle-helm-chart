@@ -137,4 +137,8 @@ peers: []
 #      MCowBQYDK2VwAyEAtYoVpsW+gRlzXM9Iu3OBoopNj6y5OB8oeOJIWD10G/U=
 #      -----END PUBLIC KEY-----
 
-
+fxRateApiKey:
+  key: ""
+  secret:
+    name: ""
+    key: ""
