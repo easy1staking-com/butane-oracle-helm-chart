@@ -142,3 +142,5 @@ fxRateApiKey:
   secret:
     name: ""
     key: ""
+
+publishUrl: ""

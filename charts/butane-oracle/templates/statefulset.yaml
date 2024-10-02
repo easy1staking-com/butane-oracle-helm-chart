@@ -57,6 +57,11 @@ spec:
               value: {{ .Values.fxRateApiKey.key }}
             {{- end}}
 
+            {{- if .Values.publishUrl }}
+            - name: PUBLISH_URL
+              value: {{ .Values.publishUrl }}
+            {{- end}}
+
           ports:
             {{- range $services := .Values.services }}
             {{- range $port := $services.ports }}
