@@ -20,6 +20,7 @@ data:
     keygen:
       {{- toYaml . | nindent 6 }}
     {{- end }}
+    publish_url: {{ .Values.publishUrl }}
     sundaeswap:
       kupo_address: {{ .Values.kupo.url }}
     minswap:
