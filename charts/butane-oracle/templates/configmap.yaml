@@ -21,6 +21,9 @@ data:
       {{- toYaml . | nindent 6 }}
     {{- end }}
     publish_url: {{ .Values.publishUrl }}
+    {{- if .Values.publishFeedBasUrl }}
+    publish_feed_base_url: {{ .Values.publishFeedBasUrl }}
+    {{- end }}
     sundaeswap:
       kupo_address: {{ .Values.kupo.url }}
     minswap:

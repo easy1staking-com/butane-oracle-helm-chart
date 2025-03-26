@@ -144,3 +144,5 @@ fxRateApiKey:
     key: ""
 
 publishUrl: ""
+
+publishFeedBasUrl: ""
