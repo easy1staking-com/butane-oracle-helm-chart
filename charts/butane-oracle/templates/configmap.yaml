@@ -24,11 +24,7 @@ data:
     {{- if .Values.publishFeedBaseUrl }}
     publish_feed_base_url: {{ .Values.publishFeedBaseUrl }}
     {{- end }}
-    sundaeswap:
-      kupo_address: {{ .Values.kupo.url }}
-    minswap:
-      kupo_address: {{ .Values.kupo.url }}
-    spectrum:
+    kupo:
       kupo_address: {{ .Values.kupo.url }}
     # This is the address of your current FROST public key. The key generation process will print it.
     frost_address: {{ .Values.frost.address }}
