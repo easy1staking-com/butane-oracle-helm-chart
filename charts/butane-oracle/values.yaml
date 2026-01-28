@@ -146,3 +146,5 @@ fxRateApiKey:
 publishUrl: ""
 
 publishFeedBaseUrl: ""
+
+testNetwork: "true"

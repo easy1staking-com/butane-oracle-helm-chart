@@ -33,3 +33,4 @@ data:
     peers:
       {{- toYaml . | nindent 6 }}
     {{- end }}
+    test_network: {{ .Values.testNetwork | quote }}
